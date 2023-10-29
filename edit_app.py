@@ -20,43 +20,6 @@ sys.path.append("./stable_diffusion")
 
 from stable_diffusion.ldm.util import instantiate_from_config
 
-
-help_text = """
-If you're not getting what you want, there may be a few reasons:
-1. Is the image not changing enough? Your Image CFG weight may be too high. This value dictates how similar the output should be to the input. It's possible your edit requires larger changes from the original image, and your Image CFG weight isn't allowing that. Alternatively, your Text CFG weight may be too low. This value dictates how much to listen to the text instruction. The default Image CFG of 1.5 and Text CFG of 7.5 are a good starting point, but aren't necessarily optimal for each edit. Try:
-    * Decreasing the Image CFG weight, or
-    * Incerasing the Text CFG weight, or
-2. Conversely, is the image changing too much, such that the details in the original image aren't preserved? Try:
-    * Increasing the Image CFG weight, or
-    * Decreasing the Text CFG weight
-3. Try generating results with different random seeds by setting "Randomize Seed" and running generation multiple times. You can also try setting "Randomize CFG" to sample new Text CFG and Image CFG values each time.
-4. Rephrasing the instruction sometimes improves results (e.g., "turn him into a dog" vs. "make him a dog" vs. "as a dog").
-5. Increasing the number of steps sometimes improves results.
-6. Do faces look weird? The Stable Diffusion autoencoder has a hard time with faces that are small in the image. Try:
-    * Cropping the image so the face takes up a larger portion of the frame.
-"""
-
-
-example_instructions = [
-    "Make it a picasso painting",
-    "as if it were by modigliani",
-    "convert to a bronze statue",
-    "Turn it into an anime.",
-    "have it look like a graphic novel",
-    "make him gain weight",
-    "what would he look like bald?",
-    "Have him smile",
-    "Put him in a cocktail party.",
-    "move him at the beach.",
-    "add dramatic lighting",
-    "Convert to black and white",
-    "What if it were snowing?",
-    "Give him a leather jacket",
-    "Turn him into a cyborg!",
-    "make him wear a beanie",
-]
-
-
 class CFGDenoiser(nn.Module):
     def __init__(self, model):
         super().__init__()
